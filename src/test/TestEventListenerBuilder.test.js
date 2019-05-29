@@ -6,7 +6,7 @@ const assert = require('assert')
 
 export class TestEventListenerBuilder extends TestCase {
   testEventHandlerBase() {
-    const eventListenerBuilder = new EventListenerBuilder.listen('toto')
+    const eventListenerBuilder = EventListenerBuilder.listen('toto')
   }
 
 }

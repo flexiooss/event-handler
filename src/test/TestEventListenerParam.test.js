@@ -8,7 +8,7 @@ const assert = require('assert')
 
 export class TestEventListenerParam extends TestCase {
   testEventHandlerBase() {
-    const eventListenerBuilder = new EventListenerBuilder.listen('toto').callback(a=>a).build()
+    const eventListenerBuilder = EventListenerBuilder.listen('toto').callback(a=>a).build()
   }
 
 }
