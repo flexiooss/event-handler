@@ -1,6 +1,5 @@
 import {isBoolean,assert} from '@flexio-oss/assert'
-import {UID} from '../uid'
-import {Sequence} from '../Sequence'
+import {UID,Sequence} from '@flexio-oss/js-helpers'
 import {EventListenerParam} from './EventListenerParam'
 import {StringArray} from '@flexio-oss/extended-flex-types'
 

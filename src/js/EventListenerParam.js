@@ -1,5 +1,5 @@
 import {isFunction,assert} from '@flexio-oss/assert'
-import {deepFreezeSeal} from '../objectHelpers'
+import {deepFreezeSeal} from '@flexio-oss/js-type-helpers'
 import {SymbolStringArray} from '@flexio-oss/extended-flex-types'
 
 export class EventListenerParam {
