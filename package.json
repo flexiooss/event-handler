@@ -1,6 +1,6 @@
 {
   "name": "@flexio-oss/event-handler",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Abstract pub / sub handler",
   "main": "index.js",
   "module": "index.js",
@@ -9,7 +9,7 @@
   "license": "Apache-2.0",
   "dependencies": {
     "@flexio-oss/assert": "0.0.0",
-    "@flexio-oss/extended-flex-types": "0.0.0",
+    "@flexio-oss/extended-flex-types": "0.1.0",
     "@flexio-oss/js-helpers": "0.0.0",
     "@flexio-oss/js-type-helpers": "0.0.0"
   },

@@ -179,6 +179,7 @@ export class EventHandlerBase {
     this._listeners.get(event).forEach((v, k) => {
       this._isHandled.delete(k)
     })
+    this._pendingPayload.delete(event)
     this._pendingPayload.set(event, payload)
     this[_isDispatching_] = true
   }
@@ -192,7 +193,6 @@ export class EventHandlerBase {
     this._listeners.get(event).forEach((v, k) => {
       this._isPending.delete(k)
     })
-    this._pendingPayload.delete(event)
     this[_isDispatching_] = false
   }
 
