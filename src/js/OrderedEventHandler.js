@@ -11,24 +11,24 @@ import {EventListenerOrderedParam} from './EventListenerOrderedParam'
 export class OrderedEventHandler extends EventHandlerBase {
   /**
    *
-   * @param {EventListenerOrderedParam} eventListenerOrderedParam
+   * @param {OrderedEventListenerConfig} orderedEventListenerConfig
    * @return {(String|StringArray)} token
    * @throws AssertionError
    */
-  addEventListener(eventListenerOrderedParam) {
-    assertType(eventListenerOrderedParam instanceof EventListenerOrderedParam,
-      'EventHandler:addEventListener: ̀`eventListenerOrderedParam` argument assert be an instance of EventListenerOrderedParam'
+  addEventListener(orderedEventListenerConfig) {
+    assertType(orderedEventListenerConfig instanceof OrderedEventListenerConfig,
+      'EventHandler:addEventListener: ̀`orderedEventListenerConfig` argument assert be an instance of OrderedEventListenerConfig'
     )
 
     const ids = new StringArray()
-    for (const event of eventListenerOrderedParam.events) {
+    for (const event of orderedEventListenerConfig.events) {
       this._ensureHaveListenersMap(event)
 
       const id = this.nextID()
 
       this._listeners.get(event).set(id, {
-        callback: eventListenerOrderedParam.callback,
-        priority: eventListenerOrderedParam.priority
+        callback: orderedEventListenerConfig.callback,
+        priority: orderedEventListenerConfig.priority
       })
 
       this._listeners.set(event,
