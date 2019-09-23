@@ -1,11 +1,11 @@
 import {OrderedEventListenerConfig} from './OrderedEventListenerConfig'
-import {EventListenerBuilder} from './EventListenerBuilder'
+import {EventListenerConfigBuilder} from './EventListenerConfigBuilder'
 
 /**
  * @class
- * @extends {EventListenerBuilder}
+ * @extends {EventListenerConfigBuilder}
  */
-export class OrderedEventListenerBuilder extends EventListenerBuilder {
+export class OrderedEventListenerConfigBuilder extends EventListenerConfigBuilder {
   /**
    *
    * @param {SymbolStringArray} events
@@ -23,7 +23,7 @@ export class OrderedEventListenerBuilder extends EventListenerBuilder {
   /**
    *
    * @param {number} priority
-   * @return {OrderedEventListenerBuilder}
+   * @return {OrderedEventListenerConfigBuilder}
    */
   priority(priority) {
     this._priority = priority
