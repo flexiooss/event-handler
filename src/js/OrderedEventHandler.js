@@ -2,7 +2,7 @@ import {assertType} from '@flexio-oss/assert'
 import {StringArray} from '@flexio-oss/extended-flex-types'
 import {EventHandlerBase} from './EventHandlerBase'
 import {sortMap} from '@flexio-oss/js-type-helpers'
-import {EventListenerOrderedParam} from './EventListenerOrderedParam'
+import {OrderedEventListenerConfig} from './OrderedEventListenerConfig'
 
 /**
  * @class
@@ -46,7 +46,7 @@ export class OrderedEventHandler extends EventHandlerBase {
   }
 
   /**
-   * @private
+   * @protected
    * @param {(String|Symbol)} event
    * @param {String} token
    */
