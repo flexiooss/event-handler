@@ -1,6 +1,6 @@
 import {isBoolean,assert} from '@flexio-oss/assert'
 import {UID,Sequence} from '@flexio-oss/js-helpers'
-import {EventListenerParam} from './EventListenerParam'
+import {EventListenerConfig} from './EventListenerConfig'
 import {StringArray} from '@flexio-oss/extended-flex-types'
 
 const _isDispatching_ = Symbol('_isDispatching_')
@@ -121,12 +121,12 @@ export class EventHandlerBase {
 
   /**
    *
-   * @param {EventListenerParam} eventListenerParam
+   * @param {EventListenerConfig} eventListenerParam
    * @returns {(String|StringArray)} token
    */
   addEventListener(eventListenerParam) {
-    assert(eventListenerParam instanceof EventListenerParam,
-      'EventHandlerBase:addEventListener: ̀`eventListenerParam` argument assert be an instance of EventListenerParam'
+    assert(eventListenerParam instanceof EventListenerConfig,
+      'EventHandlerBase:addEventListener: ̀`eventListenerParam` argument assert be an instance of EventListenerConfig'
     )
     const ids = new StringArray()
     for (const event of eventListenerParam.events) {

@@ -2,7 +2,7 @@ import {isFunction,assert} from '@flexio-oss/assert'
 import {deepFreezeSeal} from '@flexio-oss/js-type-helpers'
 import {SymbolStringArray} from '@flexio-oss/extended-flex-types'
 
-export class EventListenerParam {
+export class EventListenerConfig {
   /**
    *
    * @param {SymbolStringArray} events
@@ -10,10 +10,10 @@ export class EventListenerParam {
    */
   constructor(events, callback) {
     assert(events instanceof SymbolStringArray,
-      'EventListenerParam:constructor: ̀`events` property assert be not empty'
+      'EventListenerConfig:constructor: ̀`events` property assert be not empty'
     )
     assert(isFunction(callback),
-      'EventListenerParam:constructor: ̀`callback` property assert be Callable'
+      'EventListenerConfig:constructor: ̀`callback` property assert be Callable'
     )
     /**
      *
@@ -32,7 +32,7 @@ export class EventListenerParam {
    * @param {SymbolStringArray} events
    * @param {EventHandlerBase~eventClb} callback
    * @constructor
-   * @readonly {EventListenerParam}
+   * @readonly {EventListenerConfig}
    */
   static create(events, callback) {
     return deepFreezeSeal(new this(events, callback))

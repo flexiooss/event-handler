@@ -1,5 +1,5 @@
 /* global runTest */
-import {EventListenerParam} from '../js/EventListenerParam'
+import {EventListenerConfig} from '../js/EventListenerConfig'
 import {EventListenerBuilder} from '../js/EventListenerBuilder'
 
 import {TestCase} from 'code-altimeter-js'
