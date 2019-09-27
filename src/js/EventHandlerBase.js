@@ -6,10 +6,6 @@ import {StringArray} from '@flexio-oss/extended-flex-types'
 const _isDispatching_ = Symbol('_isDispatching_')
 const _sequenceId_ = Symbol('_sequenceId_')
 
-/**
- * @class
- * @abstract
- */
 export class EventHandlerBase {
   constructor() {
     /**
