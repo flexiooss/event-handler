@@ -1,5 +1,5 @@
-import {isBoolean,assert} from '@flexio-oss/assert'
-import {UID,Sequence} from '@flexio-oss/js-helpers'
+import {isBoolean, assert} from '@flexio-oss/assert'
+import {UID, Sequence} from '@flexio-oss/js-helpers'
 import {EventListenerConfig} from './EventListenerConfig'
 import {StringArray} from '@flexio-oss/extended-flex-types'
 
@@ -186,9 +186,11 @@ export class EventHandlerBase {
    * @protected
    */
   _stopDispatching(event) {
-    this._listeners.get(event).forEach((v, k) => {
-      this._isPending.delete(k)
-    })
+    if (this._listeners.has(event)) {
+      this._listeners.get(event).forEach((v, k) => {
+        this._isPending.delete(k)
+      })
+    }
     this[_isDispatching_] = false
   }
 
@@ -198,5 +200,17 @@ export class EventHandlerBase {
    */
   isDispatching() {
     return this[_isDispatching_]
+  }
+
+  /**
+   *
+   * @return {this}
+   */
+  clear() {
+    this._listeners.clear()
+    this._pendingPayload.clear()
+    this._isHandled.clear()
+    this._isPending.clear()
+    return this
   }
 }
