@@ -1,7 +1,7 @@
-import {EventListenerParam} from './EventListenerParam'
+import {EventListenerConfig} from './EventListenerConfig'
 import {SymbolStringArray} from '@flexio-oss/extended-flex-types'
 
-export class EventListenerBuilder {
+export class EventListenerConfigBuilder {
   /**
    *
    * @param {SymbolStringArray} events
@@ -24,7 +24,7 @@ export class EventListenerBuilder {
   /**
    *
    * @param {...(String|Symbol)} events
-   * @return {EventListenerBuilder}
+   * @return {EventListenerConfigBuilder}
    * @constructor
    */
   static listen(...events) {
@@ -34,7 +34,7 @@ export class EventListenerBuilder {
   /**
    *
    * @param {EventHandlerBase~eventClb} clb
-   * @return {EventListenerBuilder}
+   * @return {EventListenerConfigBuilder}
    */
   callback(clb) {
     this._callback = clb
@@ -43,10 +43,10 @@ export class EventListenerBuilder {
 
   /**
    *
-   * @return {EventListenerParam}
+   * @return {EventListenerConfig}
    */
   build() {
-    return EventListenerParam.create(
+    return EventListenerConfig.create(
       this._events,
       this._callback
     )
