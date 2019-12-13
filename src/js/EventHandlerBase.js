@@ -118,7 +118,7 @@ export class EventHandlerBase {
   /**
    *
    * @param {EventListenerConfig} eventListenerParam
-   * @returns {(String|StringArray)} token
+   * @returns {(String|StringArray)} externalChooserPublic
    */
   addEventListener(eventListenerParam) {
     assert(eventListenerParam instanceof EventListenerConfig,

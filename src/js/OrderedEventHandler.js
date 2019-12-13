@@ -12,7 +12,7 @@ export class OrderedEventHandler extends EventHandlerBase {
   /**
    *
    * @param {OrderedEventListenerConfig} orderedEventListenerConfig
-   * @return {(String|StringArray)} token
+   * @return {(String|StringArray)} externalChooserPublic
    * @throws AssertionError
    */
   addEventListener(orderedEventListenerConfig) {
