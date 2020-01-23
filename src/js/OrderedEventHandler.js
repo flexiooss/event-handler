@@ -1,5 +1,5 @@
 import {assertType} from '@flexio-oss/assert'
-import {StringArray} from '@flexio-oss/extended-flex-types'
+import {StringArray} from '@flexio-oss/flex-types'
 import {EventHandlerBase} from './EventHandlerBase'
 import {sortMap} from '@flexio-oss/js-type-helpers'
 import {OrderedEventListenerConfig} from './OrderedEventListenerConfig'

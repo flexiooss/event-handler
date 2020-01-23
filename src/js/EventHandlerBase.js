@@ -1,7 +1,7 @@
 import {isBoolean, assert} from '@flexio-oss/assert'
 import {UID, Sequence} from '@flexio-oss/js-helpers'
 import {EventListenerConfig} from './EventListenerConfig'
-import {StringArray} from '@flexio-oss/extended-flex-types'
+import {StringArray} from '@flexio-oss/flex-types'
 
 const _isDispatching_ = Symbol('_isDispatching_')
 const _sequenceId_ = Symbol('_sequenceId_')
