@@ -23,7 +23,7 @@ export class OrderedEventListenerConfigBuilder extends EventListenerConfigBuilde
   /**
    *
    * @param {number} priority
-   * @return {OrderedEventListenerConfigBuilder}
+   * @return {this}
    */
   priority(priority) {
     this._priority = priority

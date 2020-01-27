@@ -1,15 +1,19 @@
 /* global runTest */
-import {EventHandlerBase} from '../js/EventHandlerBase'
+import {OrderedEventHandler} from '../js/OrderedEventHandler'
 import {TestCase} from 'code-altimeter-js'
-import {EventListenerConfigBuilder} from '../js/EventListenerConfigBuilder'
+import {OrderedEventListenerConfigBuilder} from '../js/OrderedEventListenerConfigBuilder'
 
 
 const assert = require('assert')
 
 
-export class TestEventHandlerBase extends TestCase {
+export class TestOrderedEventHandler extends TestCase {
   setUp() {
-    this.handler = new EventHandlerBase(10)
+    /**
+     *
+     * @type {OrderedEventHandler}
+     */
+    this.handler = new OrderedEventHandler(10)
   }
 
   testHaveListener() {
@@ -17,11 +21,12 @@ export class TestEventHandlerBase extends TestCase {
     let result = []
 
     const token_1 = this.handler.addEventListener(
-      EventListenerConfigBuilder
+      OrderedEventListenerConfigBuilder
         .listen(EVENT_1)
         .callback(() => {
           result.push(1)
         })
+        .priority(100)
         .build()
     )
 
@@ -38,30 +43,32 @@ export class TestEventHandlerBase extends TestCase {
     let result = []
 
     const token_1 = this.handler.addEventListener(
-      EventListenerConfigBuilder
+      OrderedEventListenerConfigBuilder
         .listen(EVENT_1)
         .callback(() => {
           result.push(1)
         })
+        .priority(55)
         .build()
     )
 
     assert(this.handler.hasEventListener(EVENT_1, token_1), 'Handler should have \'token_1\' listener')
 
     const token_2 = this.handler.addEventListener(
-      EventListenerConfigBuilder
+      OrderedEventListenerConfigBuilder
         .listen(EVENT_1)
         .callback(() => {
           result.push(2)
         })
+        .priority(50)
         .build()
     )
 
     assert(this.handler.hasEventListener(EVENT_1, token_2), 'Handler should have \'token_2\' listener')
 
-    this.handler.dispatch(EVENT_1)
+    this.handler.dispatch(EVENT_1, null)
 
-    assert.deepStrictEqual([1, 2], result, 'Listeners should be executed ')
+    assert.deepStrictEqual([2, 1], result, 'Listeners should be executed ')
 
   }
 
@@ -70,7 +77,7 @@ export class TestEventHandlerBase extends TestCase {
     let result = []
 
     const token_1 = this.handler.addEventListener(
-      EventListenerConfigBuilder
+      OrderedEventListenerConfigBuilder
         .listen(EVENT_1)
         .callback((n) => {
           result.push(n + 1)
@@ -79,7 +86,7 @@ export class TestEventHandlerBase extends TestCase {
     )
 
     const token_2 = this.handler.addEventListener(
-      EventListenerConfigBuilder
+      OrderedEventListenerConfigBuilder
         .listen(EVENT_1)
         .callback((n) => {
           if (result.length < 2) {
@@ -87,21 +94,23 @@ export class TestEventHandlerBase extends TestCase {
           }
           result.push(n + 2)
         })
+        .priority(60)
         .build()
     )
 
     const token_3 = this.handler.addEventListener(
-      EventListenerConfigBuilder
+      OrderedEventListenerConfigBuilder
         .listen(EVENT_1)
         .callback((n) => {
           result.push(n + 3)
         })
+        .priority(50)
         .build()
     )
 
     this.handler.dispatch(EVENT_1, 'a')
 
-    assert.deepStrictEqual(['a1', 'b1', 'b2', 'b3', 'a2', 'a3'], result, 'Listeners should be executed in deep and recursivly')
+    assert.deepStrictEqual(['a3', 'b3', 'b2', 'b1', 'a2', 'a1'], result, 'Listeners should be executed in deep and recursivly')
 
   }
 
@@ -110,7 +119,7 @@ export class TestEventHandlerBase extends TestCase {
     let result = []
 
     const token_1 = this.handler.addEventListener(
-      EventListenerConfigBuilder
+      OrderedEventListenerConfigBuilder
         .listen(EVENT_1)
         .callback((n) => {
           result.push(n + 1)
@@ -119,21 +128,23 @@ export class TestEventHandlerBase extends TestCase {
     )
 
     const token_2 = this.handler.addEventListener(
-      EventListenerConfigBuilder
+      OrderedEventListenerConfigBuilder
         .listen(EVENT_1)
         .callback((n) => {
           this.handler.dispatch(EVENT_1, 'b')
           result.push(n + 2)
         })
+        .priority(50)
         .build()
     )
 
     const token_3 = this.handler.addEventListener(
-      EventListenerConfigBuilder
+      OrderedEventListenerConfigBuilder
         .listen(EVENT_1)
         .callback((n) => {
           result.push(n + 3)
         })
+        .priority(0)
         .build()
     )
 
@@ -149,4 +160,4 @@ export class TestEventHandlerBase extends TestCase {
 }
 
 
-runTest(TestEventHandlerBase)
+runTest(TestOrderedEventHandler)

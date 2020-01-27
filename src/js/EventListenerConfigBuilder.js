@@ -24,7 +24,7 @@ export class EventListenerConfigBuilder {
   /**
    *
    * @param {...(String|Symbol)} events
-   * @return {EventListenerConfigBuilder}
+   * @return {this}
    * @constructor
    */
   static listen(...events) {
@@ -34,7 +34,7 @@ export class EventListenerConfigBuilder {
   /**
    *
    * @param {EventHandlerBase~eventClb} clb
-   * @return {EventListenerConfigBuilder}
+   * @return {this}
    */
   callback(clb) {
     this._callback = clb
