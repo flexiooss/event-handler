@@ -102,14 +102,13 @@ export class EventHandlerBase {
    * @param {EventHandlerBase~eventClb} clb
    */
   _invokeCallback(dispatchExecution, listenerToken, clb) {
-    dispatchExecution.startExecution(listenerToken)
-
-    try {
-      clb(dispatchExecution.payload(), dispatchExecution.event(), dispatchExecution.id())
-    } finally {
-      dispatchExecution.finishExecution(listenerToken)
+    if (dispatchExecution.startExecution(listenerToken)) {
+      try {
+        clb(dispatchExecution.payload(), dispatchExecution.event(), dispatchExecution.id())
+      } finally {
+        dispatchExecution.finishExecution(listenerToken)
+      }
     }
-
   }
 
   /**
@@ -373,12 +372,17 @@ class DispatchExecution {
     return this.__pending.has(listenerToken)
   }
 
+  /**
+   *
+   * @param {string} listenerToken
+   * @return {boolean}
+   */
   startExecution(listenerToken) {
-    if (!this.isPending(listenerToken)) {
-      throw new Error(listenerToken + ' is not Pending')
+    if (this.isPending(listenerToken)) {
+      this.__executing = listenerToken
+      return true
     }
-    this.__executing = listenerToken
-    return this
+    return false
   }
 
   finishExecution(listenerToken) {
