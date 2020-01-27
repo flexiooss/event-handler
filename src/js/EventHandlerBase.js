@@ -16,6 +16,7 @@ const _sequenceId_ = Symbol('_sequenceId_')
  */
 
 export class EventHandlerBase {
+
   constructor(maxExecution = 100) {
     /**
      *
@@ -38,6 +39,12 @@ export class EventHandlerBase {
     this._executionQueue = new Map()
 
     this[_sequenceId_] = new Sequence(UID())
+    /**
+     *
+     * @type {?DispatchExecution}
+     * @private
+     */
+    this.__currentExecution = null
 
     /**
      * @property {boolean}
@@ -195,7 +202,7 @@ export class EventHandlerBase {
       .set(execution.id(), execution)
 
     this[_isDispatching_] = true
-
+    this.__currentExecution = execution
     return execution
   }
 
@@ -220,7 +227,7 @@ export class EventHandlerBase {
    */
   _ensureMaxExecution(event) {
     if (this._executionQueue.get(event).size + 1 > this._maxExecution) {
-      throw new Error('MAX EXECUTION '+ this._maxExecution +' FOR : ' + event)
+      throw new Error('MAX EXECUTION ' + this._maxExecution + ' FOR : ' + event)
     }
     return this
   }
@@ -228,11 +235,14 @@ export class EventHandlerBase {
   /**
    *
    * @param {DispatchExecution} execution
+   * @return {this}
    * @protected
    */
   _stopDispatching(execution) {
-    this._executionQueue.get(execution.event()).delete(execution.id())
+    this.__currentExecution = null
     this[_isDispatching_] = false
+    this._executionQueue.get(execution.event()).delete(execution.id())
+    return this
   }
 
   /**
@@ -251,6 +261,14 @@ export class EventHandlerBase {
     this._listeners.clear()
     this._executionQueue.clear()
     return this
+  }
+
+  /**
+   *
+   * @return {?DispatchExecution}
+   */
+  currentExecution() {
+    return this.__currentExecution
   }
 }
 
