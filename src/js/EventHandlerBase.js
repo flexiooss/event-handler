@@ -89,7 +89,7 @@ export class EventHandlerBase {
             }
           )
       } finally {
-        this._stopDispatching(dispatchExecution)
+        this._stopDispatch(dispatchExecution)
       }
     }
   }
@@ -239,10 +239,12 @@ export class EventHandlerBase {
    * @return {this}
    * @protected
    */
-  _stopDispatching(execution) {
+  _stopDispatch(execution) {
     this.__currentExecution = null
     this[_isDispatching_] = false
-    this._executionQueue.get(execution.event()).delete(execution.id())
+    if (this._executionQueue.has(execution.event())) {
+      this._executionQueue.get(execution.event()).delete(execution.id())
+    }
     return this
   }
 
